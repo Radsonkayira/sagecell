@@ -1,0 +1,30 @@
+# Define the variables
+var('beta eta1 delta C alpha1 eta2 mu1 S eta gamma eta3 P alpha2 R mu2 alpha3')
+
+# Define the Jacobian matrix
+J = matrix([[-((beta + eta1*delta)*C + (alpha1 + eta2*delta) + mu1), -((beta + eta*delta)*S), 0, 0],
+           [((beta + eta1*delta)*C), ((beta + eta*delta)*S + (gamma + eta3*delta)*P - alpha2*R - (mu2 + mu1)), ((gamma + eta3*delta)*C), -alpha2*C],
+           [(alpha1 + eta2*delta), -((gamma + eta3*delta)*C), -((gamma + eta3*delta)*C + mu1 + alpha3*R), alpha3*P + alpha2*C - mu1],
+           [0, 0, alpha2*R, alpha3*R]])
+
+# Set P = 0
+J_P0 = J.subs(P=0)
+
+# Print the reduced Jacobian matrix
+print("Reduced Jacobian Matrix:")
+print(J_P0)
+
+# Calculate the characteristic polynomial
+char_poly = J_P0.characteristic_polynomial()
+
+# Print the characteristic polynomial
+print("\nCharacteristic Polynomial:")
+print(char_poly)
+
+# Calculate the eigenvalues
+eigenvalues = J_P0.eigenvalues()
+
+# Print the eigenvalues
+print("\nEigenvalues:")
+for eigenvalue in eigenvalues:
+    print(eigenvalue)
